@@ -1,10 +1,10 @@
-package br.com.agendamentolab;
+package com.agendamento.lab;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AgendamentolabApplicationTests {
+class AgendamentoLabApplicationTests {
 
 	@Test
 	void contextLoads() {
