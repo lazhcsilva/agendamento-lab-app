@@ -1,8 +1,8 @@
 package com.agendamento.lab.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Professor {
@@ -12,9 +12,7 @@ public class Professor {
 	private Integer matricula;
 	private String nome;
 	private String cadeira;
-	
-	
-	
+
 	public Integer getMatricula() {
 		return matricula;
 	}
