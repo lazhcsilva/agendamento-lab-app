@@ -3,9 +3,9 @@ package com.agendamento.lab.Models;
 import java.sql.Date;
 import java.sql.Time;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Agendamento {
