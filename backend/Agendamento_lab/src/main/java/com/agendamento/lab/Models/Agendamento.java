@@ -1,20 +1,26 @@
 package com.agendamento.lab.Models;
 
 import java.sql.Date;
-import java.sql.Time;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 @Entity
+@Table(name="cad_agendamento")
 public class Agendamento {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@NotBlank
 	private Date data_agendamento;
-	private Time horario_agendamento;
+	@NotBlank
+	private String turno;
+	@NotBlank
+	private String disciplina;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -27,11 +33,17 @@ public class Agendamento {
 	public void setData_agendamento(Date data_agendamento) {
 		this.data_agendamento = data_agendamento;
 	}
-	public Time getHorario_agendamento() {
-		return horario_agendamento;
+	public String getTurno() {
+		return turno;
 	}
-	public void setHorario_agendamento(Time horario_agendamento) {
-		this.horario_agendamento = horario_agendamento;
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+	public String getDisciplina() {
+		return disciplina;
+	}
+	public void setDisciplina(String disciplina) {
+		this.disciplina = disciplina;
 	}
 	
 }
