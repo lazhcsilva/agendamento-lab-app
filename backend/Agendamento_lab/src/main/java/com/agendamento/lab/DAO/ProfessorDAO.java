@@ -11,6 +11,6 @@ public interface ProfessorDAO extends JpaRepository<Professor, Integer>{
     public Professor findProfessorByEmail(String email);
 
     @Query("select cps from cad_professor cps where cps.senha = :senha")
-    public Professor findProfessorBysenha(String senha);
+    public Professor findProfessorBysenha(String senha); 
 
 }
