@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendamento.lab.model.Funcionario;
 
+
 import com.agendamento.lab.dao.FuncionarioDAO;
 @RestController
 @RequestMapping("/api/v1")
 public class FuncionarioController {
 
-     @Autowired
+    @Autowired
 	private FuncionarioDAO funcionarioDAO;
 
     @PostMapping("/cad_func")
