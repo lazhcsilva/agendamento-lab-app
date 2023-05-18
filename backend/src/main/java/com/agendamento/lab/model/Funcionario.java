@@ -5,9 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
-import antlr.collections.List;
-
 @Entity
 @Table(name="tab_funcionario")
 @Getter @Setter

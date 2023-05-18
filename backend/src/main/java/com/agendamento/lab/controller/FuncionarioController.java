@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agendamento.lab.model.Funcionario;
-
+import com.agendamento.lab.Response.Response;
 import com.agendamento.lab.dao.FuncionarioDAO;
 @RestController
 @RequestMapping("/api/v1")
@@ -18,14 +18,19 @@ public class FuncionarioController {
 	private FuncionarioDAO funcionarioDAO;
 
     @PostMapping("/cad_func")
-    public Funcionario cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){
+    public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){
+        
        String matricula_banco = funcionarioDAO.findmatricula(funcionario.getMatricula());
        System.out.println("matricula banco: "+ matricula_banco );
         if( matricula_banco == null ){
-            return this.funcionarioDAO.save(funcionario);
+            this.funcionarioDAO.save(funcionario);
+            int status = 200;
+            String message = "Funcionario cadastrado com sucesso.";
+            return new Response(status, message);
         }else{
-            System.out.println("Funcionario ja existente");
-            return null;
+            int status = 409;
+            String message = "Funcionario já está cadastrado.";
+            return new Response(status, message);
         }
     }
 }
