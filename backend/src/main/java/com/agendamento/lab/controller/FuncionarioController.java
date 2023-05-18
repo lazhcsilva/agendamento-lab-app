@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agendamento.lab.model.Funcionario;
 
-
 import com.agendamento.lab.dao.FuncionarioDAO;
 @RestController
 @RequestMapping("/api/v1")
