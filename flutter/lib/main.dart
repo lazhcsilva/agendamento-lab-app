@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/HomePage',
       routes: {
         '/HomePage': (context) => HomePage(),
-        '/primeira': (context) => CadastroPage(),
+        '/CadastroPage': (context) => CadastroPage(),
       },
     );
   }
