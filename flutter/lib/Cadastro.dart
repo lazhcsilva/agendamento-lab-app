@@ -3,7 +3,20 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 
-class Cadastro extends StatelessWidget {
+class CadastroPage extends StatefulWidget {
+  @override
+  _CadastroPageState createState() => _CadastroPageState();
+}
+
+class _CadastroPageState extends State<CadastroPage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController _Nome = TextEditingController();
+  final TextEditingController _Senha = TextEditingController();
+  final TextEditingController _Senha2 = TextEditingController();
+  final TextEditingController _Matricula = TextEditingController();
+  final TextEditingController _Disciplina = TextEditingController();
+  final TextEditingController _Email = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +41,12 @@ class Cadastro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Form(
+                    key: formKey,
                     child: Center(
                       child: ListView(
                         shrinkWrap: true,
                         children: [
+                          Text('Nome'),
                           TextFormField(
                               decoration: const InputDecoration(
                                 labelText: 'insira seu nome completo',
@@ -42,13 +57,17 @@ class Cadastro extends StatelessWidget {
                                 counterText: '',
                                 border: OutlineInputBorder(),
                               ),
+                              controller: _Nome,
                               maxLength: 10,
                               keyboardType: TextInputType.text,
                               validator: (text) {
                                 if (text == null || text.isEmpty)
                                   return 'Campo obrigatório';
                               }),
-                          const SizedBox(height: 16),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text("Matrícula"),
                           TextFormField(
                             decoration: const InputDecoration(
                                 labelText: 'Insira sua Matrícula',
@@ -58,6 +77,7 @@ class Cadastro extends StatelessWidget {
                                 suffixText: 'Matrícula',
                                 counterText: '',
                                 border: OutlineInputBorder()),
+                            controller: _Matricula,
                             maxLength: 10,
                             keyboardType: TextInputType.number,
                             validator: (text) {
@@ -66,6 +86,7 @@ class Cadastro extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 16),
+                          Text("E-mail"),
                           TextFormField(
                             decoration: const InputDecoration(
                                 labelText: 'Insira seu e-mail',
@@ -75,6 +96,7 @@ class Cadastro extends StatelessWidget {
                                 suffixText: 'e-mail',
                                 counterText: '',
                                 border: OutlineInputBorder()),
+                            controller: _Email,
                             maxLength: 10,
                             keyboardType: TextInputType.text,
                             validator: (text) {
@@ -83,6 +105,7 @@ class Cadastro extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 16),
+                          Text('Senha'),
                           TextFormField(
                             decoration: const InputDecoration(
                                 labelText: 'Insira sua senha',
@@ -92,14 +115,16 @@ class Cadastro extends StatelessWidget {
                                 suffixText: 'Senha',
                                 counterText: '',
                                 border: OutlineInputBorder()),
+                            controller: _Senha,
                             maxLength: 10,
                             keyboardType: TextInputType.number,
-                            validator: (text) {
-                              if (text == null || text.isEmpty)
+                            validator: (text1) {
+                              if (text1 == null || text1.isEmpty)
                                 return 'Campo obrigatório';
                             },
                           ),
                           const SizedBox(height: 16),
+                          Text('Senha Novamente'),
                           TextFormField(
                             decoration: const InputDecoration(
                                 labelText: 'Insira sua senha novamente',
@@ -109,6 +134,28 @@ class Cadastro extends StatelessWidget {
                                 suffixText: 'Senha',
                                 counterText: '',
                                 border: OutlineInputBorder()),
+                            controller: _Senha2,
+                            maxLength: 10,
+                            keyboardType: TextInputType.number,
+                            validator: (text2) {
+                              if (text2 == null ||
+                                  text2.isEmpty ||
+                                  _Senha.text != _Senha2.text)
+                                return 'senhas estão diferentes';
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          Text('Disciplina'),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                                labelText: 'Insira sua Disciplina',
+                                labelStyle: TextStyle(color: Colors.purple),
+                                hintText: 'Insira sua Disciplina',
+                                hintStyle: TextStyle(color: Colors.purple),
+                                suffixText: 'Disciplina',
+                                counterText: '',
+                                border: OutlineInputBorder()),
+                            controller: _Disciplina,
                             maxLength: 10,
                             keyboardType: TextInputType.number,
                             validator: (text) {
@@ -124,14 +171,25 @@ class Cadastro extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.purple),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return HomePage();
-                                    },
-                                  ),
-                                );
+                                if (formKey.currentState!.validate()) {
+                                  setState(() {
+                                    final String nome = _Nome.text;
+                                    final double? senha =
+                                        double.tryParse(_Senha.text);
+                                    final double? matricula =
+                                        double.tryParse(_Matricula.text);
+                                    final String disciplina = _Disciplina.text;
+                                    final String email = _Email.text;
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return HomePage();
+                                        },
+                                      ),
+                                    );
+                                  });
+                                }
                               },
                               child: Text(
                                 'Cadastrar',
