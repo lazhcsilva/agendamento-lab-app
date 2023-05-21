@@ -1,4 +1,4 @@
-package com.agendamento.lab.Response;
+package com.agendamento.lab.response;
 
 
 public class ResponseFuncionarioGet{

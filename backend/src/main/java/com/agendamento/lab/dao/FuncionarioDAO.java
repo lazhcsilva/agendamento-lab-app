@@ -14,21 +14,21 @@ public interface FuncionarioDAO extends JpaRepository<Funcionario, Long> {
 //    public Professor findProfessorBysenha(String senha);
 
     @Query("select fc.matricula from Funcionario fc where fc.matricula =:matricula")
-    public String findmatricula(String matricula);
+    public Integer findMatricula(Integer matricula);
 
     @Query("select fc.nome from Funcionario fc where fc.nome =:nome and fc.cadeira =:cadeira")
     public String findnameandchair(String nome, String cadeira);
 
     @Query("select fc.nome from Funcionario fc WHERE fc.matricula =:matricula")
-    public String atualizarnomedocadastrofuncionario(String matricula);
+    public String atualizarnomedocadastrofuncionario(Integer matricula);
 
     @Query("select fc.email from Funcionario fc WHERE fc.matricula =:matricula")
-    public String atualizaremaildocadastrofuncionario(String matricula);
+    public String atualizaremaildocadastrofuncionario(Integer matricula);
     
     @Query("select  fc.cadeira from Funcionario fc WHERE fc.matricula =:matricula")
-    public String atualizarcadeiradocadastrofuncionario(String matricula);
+    public String atualizarcadeiradocadastrofuncionario(Integer matricula);
 
     @Query("update Funcionario fc SET fc.nome =:nome, fc.cadeira =:cadeira, fc.email =:email WHERE fc.matricula =:matricula")
-    public String atualizarcadastrofuncionario(String matricula,String nome, String email, String cadeira);
+    public String atualizarcadastrofuncionario(Integer matricula,String nome, String email, String cadeira);
 
 }

@@ -1,4 +1,4 @@
-package com.agendamento.lab.Response;
+package com.agendamento.lab.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 public class ResponseFuncionario {
     private int status;
     private String message;
-    
    
     public ResponseFuncionario(int status, String message) {
         this.status = status;

@@ -10,11 +10,12 @@ import javax.validation.constraints.NotBlank;
 @Getter @Setter
 public class Funcionario {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idProfessor;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long idProfessor;
 
-	private String matricula;
+	@Id
+	private Integer matricula;
 	@NotBlank
 	private String nome;
 	@NotBlank
