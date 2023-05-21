@@ -25,14 +25,14 @@ public class FuncionarioController {
     @PostMapping("/cad_func")
     public ResponseFuncionario cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){
         
-       Integer matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
-       System.out.println("matricula banco: " + matricula_banco );
-        if( matricula_banco == null ){
+        Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
+        System.out.println("matricula banco: " + matricula_banco );
+        if(matricula_banco == null){
             this.funcionarioDAO.save(funcionario);
             int status = 200;
             String message = "Funcionario cadastrado com sucesso.";
             return new ResponseFuncionario(status, message);
-        } else {
+        }else{
             int status = 409;
             String message = "Funcionario já está cadastrado.";
             return new ResponseFuncionario(status, message);
@@ -48,7 +48,21 @@ public class FuncionarioController {
     }
 
     @PatchMapping("/edit_func")
-    public ResponseEntity<?> editarFuncionario(@RequestBody Funcionario funcionario){
+    public ResponseEntity<?> editarFuncionario(@Valid @RequestBody Funcionario funcionario){
         return funcionarioService.updateFuncionario(funcionario, "update");
+    }
+    @DeleteMapping("/delet_func/{matricula}")
+    public ResponseFuncionario deleteFuncionario(@PathVariable Long matricula, Funcionario funcionario){
+        Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
+        if(matricula_banco == null){
+            int status = 409;
+            String message = "Funcionario não encontrado";
+            return new ResponseFuncionario(status, message);
+        }else{
+            funcionarioService.deletefunc(matricula);
+            int status = 200;
+            String message = "Funcionario deletado com sucesso";
+            return new ResponseFuncionario(status, message);
+        }
     }
 }

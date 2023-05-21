@@ -15,7 +15,7 @@ public class Funcionario {
 //	private Long idProfessor;
 
 	@Id
-	private Integer matricula;
+	private Long matricula;
 	@NotBlank
 	private String nome;
 	@NotBlank
