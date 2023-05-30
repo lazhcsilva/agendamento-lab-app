@@ -18,4 +18,7 @@ public interface FuncionarioDAO extends JpaRepository<Funcionario, Long> {
 
     @Query("select fc.nome from Funcionario fc where fc.nome =:nome and fc.cadeira =:cadeira")
     public String findnameandchair(String nome, String cadeira);
+
+    @Query("select fc.email from Funcionario fc where fc.email =:email")
+    public String findemail(String email);
 }

@@ -2,7 +2,7 @@ package com.agendamento.lab.service;
 
 import com.agendamento.lab.dao.FuncionarioDAO;
 import com.agendamento.lab.model.Funcionario;
-import com.agendamento.lab.response.ResponseFuncionario;
+import com.agendamento.lab.response.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +19,10 @@ public class FuncionarioService {
         return new ResponseEntity<Funcionario>(funcionarioDAO.save(funcionario), HttpStatus.CREATED);
     }
 
-    public ResponseFuncionario deletefunc(Long matricula){
+    public Response deletefunc(long matricula){
         funcionarioDAO.deleteById(matricula);
         int status = 200;
         String message = "Funcionario deletado com sucesso.";
-        return new ResponseFuncionario(status, message);
+        return new Response(status, message);
     }
 }
