@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,9 +20,9 @@ public class Agendamento {
 	private Long idAgendamento;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate data_agendamento;
-	@NotBlank
+	
 	private String turno;
-	@NotBlank
+	
 	private String disciplina;
 	@ManyToOne
 	private Funcionario funcionario;

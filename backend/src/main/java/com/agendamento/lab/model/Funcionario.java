@@ -27,8 +27,20 @@ public class Funcionario {
 	@NotBlank
 	private String cadeira;
 
+	public Funcionario() {
+		
+	}
+
 	public Funcionario(Integer matricula) {
 		this.matricula = matricula;
+	}
+
+	public Funcionario(Integer matricula, String nome, String email, String senha, String cadeira) {
+		this.matricula = matricula;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.cadeira = cadeira;
 	}
 	
 }
