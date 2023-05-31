@@ -5,7 +5,7 @@ import com.agendamento.lab.model.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface FuncionarioDAO extends JpaRepository<Funcionario, Long> {
+public interface FuncionarioDAO extends JpaRepository<Funcionario, Integer> {
 
 //    @Query("select cp from cad_professor cp where cp.email = :email")
 //    public Professor findProfessorByEmail(String email);
@@ -14,7 +14,7 @@ public interface FuncionarioDAO extends JpaRepository<Funcionario, Long> {
 //    public Professor findProfessorBysenha(String senha);
 
     @Query("select fc.matricula from Funcionario fc where fc.matricula =:matricula")
-    public Long findMatricula(Long matricula);
+    public Integer findMatricula(Integer matricula);
 
     @Query("select fc.nome from Funcionario fc where fc.nome =:nome and fc.cadeira =:cadeira")
     public String findnameandchair(String nome, String cadeira);

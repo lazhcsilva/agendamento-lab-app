@@ -17,7 +17,7 @@ public class Funcionario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long matricula;
+	private Integer matricula;
 	@NotBlank
 	private String nome;
 	@NotBlank
@@ -26,5 +26,9 @@ public class Funcionario {
 	private String senha;
 	@NotBlank
 	private String cadeira;
+
+	public Funcionario(Integer matricula) {
+		this.matricula = matricula;
+	}
 	
 }

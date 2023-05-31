@@ -52,8 +52,8 @@ public class FuncionarioController {
         return funcionarioService.updateFuncionario(funcionario, "update");
     }
     @DeleteMapping("/delet_func/{matricula}")
-    public Response deleteFuncionario(@PathVariable Long matricula, Funcionario funcionario){
-        Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
+    public Response deleteFuncionario(@PathVariable int matricula, Funcionario funcionario){
+        Integer matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
         System.out.println("Matricula delete no banco: " + matricula_banco);
         if(matricula_banco == null){
             int status = 409;
