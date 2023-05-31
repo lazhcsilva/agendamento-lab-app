@@ -27,6 +27,7 @@ public class FuncionarioController {
         
         String email_banco = funcionarioDAO.findemail(funcionario.getEmail());
         System.out.println("Email cadastro no banco: " + email_banco );
+
         if(email_banco == null){
             this.funcionarioDAO.save(funcionario);
             int status = 200;
