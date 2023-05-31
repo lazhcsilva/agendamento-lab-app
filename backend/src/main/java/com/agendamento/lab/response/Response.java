@@ -6,15 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 @Component
 @Getter @Setter
-public class ResponseFuncionario {
+public class Response {
     private int status;
     private String message;
 
-    public ResponseFuncionario() {
+    public Response() {
         
     }
    
-    public ResponseFuncionario(int status, String message) {
+    public Response(int status, String message) {
         this.status = status;
         this.message = message;
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.agendamento.lab.model.Funcionario;
 
-import com.agendamento.lab.response.ResponseFuncionario;
+import com.agendamento.lab.response.Response;
 import com.agendamento.lab.response.ResponseFuncionarioGet;
 import com.agendamento.lab.dao.FuncionarioDAO;
 @RestController
@@ -23,19 +23,19 @@ public class FuncionarioController {
     private FuncionarioService funcionarioService;
 
     @PostMapping("/cad_func")
-    public ResponseFuncionario cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){
+    public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){
         
-        Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
-        System.out.println("matricula banco: " + matricula_banco );
-        if(matricula_banco == null){
+        String email_banco = funcionarioDAO.findemail(funcionario.getEmail());
+        System.out.println("Email cadastro no banco: " + email_banco );
+        if(email_banco == null){
             this.funcionarioDAO.save(funcionario);
             int status = 200;
             String message = "Funcionario cadastrado com sucesso.";
-            return new ResponseFuncionario(status, message);
+            return new Response(status, message);
         }else{
             int status = 409;
             String message = "Funcionario já está cadastrado.";
-            return new ResponseFuncionario(status, message);
+            return new Response(status, message);
         }
     }
 
@@ -52,17 +52,18 @@ public class FuncionarioController {
         return funcionarioService.updateFuncionario(funcionario, "update");
     }
     @DeleteMapping("/delet_func/{matricula}")
-    public ResponseFuncionario deleteFuncionario(@PathVariable Long matricula, Funcionario funcionario){
-        Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
+    public Response deleteFuncionario(@PathVariable int matricula, Funcionario funcionario){
+        Integer matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
+        System.out.println("Matricula delete no banco: " + matricula_banco);
         if(matricula_banco == null){
             int status = 409;
             String message = "Funcionario não encontrado";
-            return new ResponseFuncionario(status, message);
+            return new Response(status, message);
         }else{
             funcionarioService.deletefunc(matricula);
             int status = 200;
             String message = "Funcionario deletado com sucesso";
-            return new ResponseFuncionario(status, message);
+            return new Response(status, message);
         }
     }
 }
