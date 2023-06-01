@@ -1,6 +1,8 @@
 package com.agendamento.lab.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -47,15 +49,28 @@ public class AgendamentoController {
 
 
     @PostMapping("/exibir_agendamento")
-    public ResponseAgendamentoGet exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
+    public List<ResponseAgendamentoGet> exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
         Funcionario funcionario = agendamento.getFuncionario();
         Integer convertInteger = new Integer(funcionario.getMatricula());
         
-        LocalDate data_agendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
-        System.out.println("data_agendamento  " + data_agendamento);
-        String turno = agendamentoDAO.findTurnoAgendamentoFunc(convertInteger);
-        System.out.println("turno  " + turno);
+        // LocalDate data_agendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
+        // System.out.println("data_agendamento  " + data_agendamento);
+        // String turno = agendamentoDAO.findTurnoAgendamentoFunc(convertInteger);
+        // System.out.println("turno  " + turno);
         
-        return new ResponseAgendamentoGet(turno,data_agendamento);
+        // return new ResponseAgendamentoGet(turno,data_agendamento);
+        List<LocalDate> datasAgendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
+        System.out.println("datasAgendamento: " + datasAgendamento);
+
+        List<String> turnos = agendamentoDAO.findTurnoAgendamentoFunc(convertInteger);
+        System.out.println("turnos: " + turnos);
+
+        List<ResponseAgendamentoGet> responseList = new ArrayList<>();
+        for (int i = 0; i < datasAgendamento.size(); i++) {
+            ResponseAgendamentoGet response = new ResponseAgendamentoGet(turnos.get(i), datasAgendamento.get(i));
+            responseList.add(response);
+        }
+
+        return responseList;
     }
 }
