@@ -26,17 +26,14 @@ public class AgendamentoController {
     @PostMapping("/cad_agend")
     public Response cadastaragendamento(@Valid @RequestBody Agendamento agendamento){
         
-        String turno_agendamento_banco = agendamentoDAO.findturnoagendamento(agendamento.getTurno());
+        String turno_agendamento_banco = agendamentoDAO.findturnoagendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Turno agendamento banco: " + turno_agendamento_banco );
 
-        LocalDate data_agendamento_banco = agendamentoDAO.findDataAgendamento(agendamento.getData_agendamento());
+        LocalDate data_agendamento_banco = agendamentoDAO.findDataAgendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Data agendamento banco: " + data_agendamento_banco );
-        Integer n1 = 1;
-        System.out.println("findDataAgendamentoFunc: " + agendamentoDAO.findDataAgendamentoFunc(n1));
-        System.out.println("findDataAgendamentoFunc: " + agendamentoDAO.findTurnoAgendamentoFunc(n1));
 
 
-        if(turno_agendamento_banco == null && data_agendamento_banco == null){
+        if((turno_agendamento_banco == null && data_agendamento_banco == null) || (turno_agendamento_banco == null && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == null)){
             this.agendamentoDAO.save(agendamento);
             int status = 200;
             String message = "Agendamento cadastrado com sucesso.";
