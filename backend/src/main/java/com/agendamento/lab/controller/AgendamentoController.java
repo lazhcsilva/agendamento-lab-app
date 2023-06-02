@@ -51,7 +51,7 @@ public class AgendamentoController {
     @PostMapping("/exibir_agendamento")
     public List<ResponseAgendamentoGet> exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
         Funcionario funcionario = agendamento.getFuncionario();
-        Integer convertInteger = new Integer(funcionario.getMatricula());
+        Integer convertInteger = funcionario.getMatricula();
         
         // LocalDate data_agendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
         // System.out.println("data_agendamento  " + data_agendamento);
