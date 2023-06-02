@@ -24,4 +24,7 @@ public interface AgendamentoDAO extends JpaRepository<Agendamento, Long> {
 
     @Query("select fc.turno from Agendamento fc where fc.funcionario in (select fx.matricula from Funcionario fx where fx.matricula =:matricula)")
     public List<String> findTurnoAgendamentoFunc(Integer matricula);
+
+    @Query("select fc.idAgendamento from Agendamento fc where fc.idAgendamento =:idagendamento")
+    public Long findAgendamento(Long idagendamento);
 }
