@@ -20,10 +20,10 @@ public interface AgendamentoDAO extends JpaRepository<Agendamento, Long> {
     public LocalDate findDataAgendamento(String turno, LocalDate data_agendamento);
     
     @Query("select fc.data_agendamento from Agendamento fc where fc.funcionario in (select fx.matricula from Funcionario fx where fx.matricula =:matricula)")
-    public List<LocalDate> findDataAgendamentoFunc(Integer matricula);
+    public List<LocalDate> findDataAgendamentoFunc(Long matricula);
 
     @Query("select fc.turno from Agendamento fc where fc.funcionario in (select fx.matricula from Funcionario fx where fx.matricula =:matricula)")
-    public List<String> findTurnoAgendamentoFunc(Integer matricula);
+    public List<String> findTurnoAgendamentoFunc(Long matricula);
 
     @Query("select fc.idAgendamento from Agendamento fc where fc.idAgendamento =:idagendamento")
     public Long findAgendamento(Long idagendamento);
