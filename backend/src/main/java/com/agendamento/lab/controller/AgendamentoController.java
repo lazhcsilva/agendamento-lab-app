@@ -7,6 +7,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import com.agendamento.lab.model.Agendamento;
 import com.agendamento.lab.model.Funcionario;
 import com.agendamento.lab.response.Response;
 import com.agendamento.lab.response.ResponseAgendamentoGet;
+import com.agendamento.lab.service.AgendamentoService;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,6 +27,9 @@ public class AgendamentoController {
 
     @Autowired
 	private AgendamentoDAO agendamentoDAO;
+
+    @Autowired
+    private AgendamentoService agendamentoService;
 
     @PostMapping("/cad_agend")
     public Response cadastaragendamento(@Valid @RequestBody Agendamento agendamento){
@@ -72,5 +78,21 @@ public class AgendamentoController {
         }
 
         return responseList;
+    }
+
+    @DeleteMapping("/delet_agend/{idAgendamento}")
+    public Response deleteFuncionario(@PathVariable Long idAgendamento, Agendamento agendamento){
+        Long id_agendamento_banco = agendamentoDAO.findAgendamento(agendamento.getIdAgendamento());
+        System.out.println("Matricula delete no banco: " + id_agendamento_banco);
+        if(id_agendamento_banco == null){
+            int status = 409;
+            String message = "Agendamento não encontrado";
+            return new Response(status, message);
+        }else{
+            agendamentoService.deleteagend(idAgendamento);
+            int status = 200;
+            String message = "Agendamento deletado com sucesso";
+            return new Response(status, message);
+        }
     }
 }

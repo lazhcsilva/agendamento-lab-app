@@ -26,5 +26,13 @@ public class Agendamento {
 	private String disciplina;
 	@ManyToOne
 	private Funcionario funcionario;
+
+	public Agendamento() {
+		
+	}
+
+	public Agendamento(Long idAgendamento) {
+		this.idAgendamento = idAgendamento;
+	}
 	
 }
