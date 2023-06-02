@@ -19,7 +19,7 @@ public class FuncionarioService {
         return new ResponseEntity<Funcionario>(funcionarioDAO.save(funcionario), HttpStatus.CREATED);
     }
 
-    public Response deletefunc(int matricula){
+    public Response deletefunc(Long matricula){
         funcionarioDAO.deleteById(matricula);
         int status = 200;
         String message = "Funcionario deletado com sucesso.";

@@ -18,4 +18,8 @@ public class AgendamentoService {
         String message = "Agendamento deletado com sucesso.";
         return new Response(status, message);
     }
+    public String deleteagendfunc(Long idAgendamento){
+        agendamentoDAO.deleteById(idAgendamento);
+        return "Agendamento Deletado";
+    }
 }

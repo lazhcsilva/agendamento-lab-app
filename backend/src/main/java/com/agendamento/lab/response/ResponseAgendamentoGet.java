@@ -22,4 +22,14 @@ public class ResponseAgendamentoGet{
         this.turno = turno;
         this.data_agendamento = data_agendamento;
     }
+
+    public class Reponse{
+        int status;
+        String message;
+
+        public void Response(int status, String message){
+            this.status = status;
+            this.message = message;
+        }
+    }
 }

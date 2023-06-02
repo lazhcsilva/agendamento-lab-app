@@ -57,14 +57,8 @@ public class AgendamentoController {
     @PostMapping("/exibir_agendamento")
     public List<ResponseAgendamentoGet> exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
         Funcionario funcionario = agendamento.getFuncionario();
-        Integer convertInteger = funcionario.getMatricula();
-        
-        // LocalDate data_agendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
-        // System.out.println("data_agendamento  " + data_agendamento);
-        // String turno = agendamentoDAO.findTurnoAgendamentoFunc(convertInteger);
-        // System.out.println("turno  " + turno);
-        
-        // return new ResponseAgendamentoGet(turno,data_agendamento);
+        Long convertInteger = funcionario.getMatricula();
+
         List<LocalDate> datasAgendamento = agendamentoDAO.findDataAgendamentoFunc(convertInteger);
         System.out.println("datasAgendamento: " + datasAgendamento);
 
@@ -76,7 +70,6 @@ public class AgendamentoController {
             ResponseAgendamentoGet response = new ResponseAgendamentoGet(turnos.get(i), datasAgendamento.get(i));
             responseList.add(response);
         }
-
         return responseList;
     }
 
