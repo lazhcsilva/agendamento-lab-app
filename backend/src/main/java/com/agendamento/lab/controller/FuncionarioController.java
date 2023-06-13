@@ -29,12 +29,15 @@ public class FuncionarioController {
     private AgendamentoDAO agendamentoDAO;
 
     @PostMapping("/cad_func")
-    public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){        
+    public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){  
+
+        //variavel que pegar de uma query para fazer a validação de funcionario existente      
         String email_banco = funcionarioDAO.findemail(funcionario.getEmail());
         System.out.println("Email cadastro no banco: " + email_banco );
         
-
+        //verificação para funcionario existente
         if(email_banco == null){
+            // chamada do save para salvar no banco
             this.funcionarioDAO.save(funcionario);
             int status = 200;
             String message = "Funcionario cadastrado com sucesso.";
@@ -48,20 +51,24 @@ public class FuncionarioController {
 
     @GetMapping("/exibir_funcionario")
     public ResponseFuncionarioGet exibirnomefuncionario(@Valid @RequestBody Funcionario funcionario){
+        //variavel que pega de uma query e exibir o nome do funcionario
         String nome = funcionarioDAO.findnameandchair(funcionario.getNome(),funcionario.getCadeira());
         System.out.println("nome lista query  " + nome);
         
         return new ResponseFuncionarioGet(nome);
     }
-
+    // metodo que editar o cadastro do funcionario
     @PatchMapping("/edit_func")
     public ResponseEntity<?> editarFuncionario(@Valid @RequestBody Funcionario funcionario){
         return funcionarioService.updateFuncionario(funcionario, "update");
     }
+
     @DeleteMapping("/delet_func/{matricula}")
     public Response deleteFuncionario(@PathVariable Long matricula, Funcionario funcionario){
+        //variavel que pegar de uma query para fazer a validação de funcionario existente para deletar 
         Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
         System.out.println("ID de Matricula delete no banco: " + matricula_banco);
+
         if(matricula_banco == null){
             int status = 409;
             String message = "Funcionario não encontrado";
@@ -70,9 +77,11 @@ public class FuncionarioController {
             List<Long> id_agendamentos_relacionados_func = funcionarioDAO.findDeletarFuncAgend(funcionario.getMatricula());
             for (int i = 0; i < id_agendamentos_relacionados_func.size(); i++) {
                 Long id = id_agendamentos_relacionados_func.get(i);
+                //chamada de metodo para deletar agendamentos massivo antes do delete do funcionario
                 agendamentoDAO.deleteById(id);
                 System.out.println("Deleção de ID de agendamento: " + id);
             }
+            //chamada de metodo para deletar funcionario
             funcionarioService.deletefunc(matricula);
             int status = 200;
             String message = "Funcionario deletado com sucesso";

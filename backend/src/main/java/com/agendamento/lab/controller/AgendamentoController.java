@@ -33,15 +33,18 @@ public class AgendamentoController {
 
     @PostMapping("/cad_agend")
     public Response cadastaragendamento(@Valid @RequestBody Agendamento agendamento){
-        
+
+        // variavel que pega a query para fazer a validação de turno de agendamento
         String turno_agendamento_banco = agendamentoDAO.findturnoagendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Turno agendamento banco: " + turno_agendamento_banco );
 
+        // variavel que pega a query para fazer a validação de data de agendamento
         LocalDate data_agendamento_banco = agendamentoDAO.findDataAgendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Data agendamento banco: " + data_agendamento_banco );
 
 
         if((turno_agendamento_banco == null && data_agendamento_banco == null) || (turno_agendamento_banco == null && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == null)){
+            // chamada de metodo de salvar o agendamento
             this.agendamentoDAO.save(agendamento);
             int status = 200;
             String message = "Agendamento cadastrado com sucesso.";
@@ -56,6 +59,7 @@ public class AgendamentoController {
 
     @PostMapping("/exibir_agendamento")
     public List<ResponseAgendamentoGet> exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
+        // converte de objeto para Long
         Funcionario funcionario = agendamento.getFuncionario();
         Long convertInteger = funcionario.getMatricula();
 
@@ -75,6 +79,7 @@ public class AgendamentoController {
 
     @DeleteMapping("/delet_agend/{idAgendamento}")
     public Response deleteFuncionario(@PathVariable Long idAgendamento, Agendamento agendamento){
+        // variavel que pega a query para fazer a validação do id do agendamento
         Long id_agendamento_banco = agendamentoDAO.findAgendamento(agendamento.getIdAgendamento());
         System.out.println("Matricula delete no banco: " + id_agendamento_banco);
         if(id_agendamento_banco == null){
@@ -82,6 +87,7 @@ public class AgendamentoController {
             String message = "Agendamento não encontrado";
             return new Response(status, message);
         }else{
+            // chamanda do metodo de deletar agedamento
             agendamentoService.deleteagend(idAgendamento);
             int status = 200;
             String message = "Agendamento deletado com sucesso";
