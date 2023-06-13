@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.purple,
           toolbarHeight: 110,
           title: Text(
-            'Uninassau',
+            'Agendamento',
             style: TextStyle(
               fontFamily: 'Anton',
               color: Colors.white,
