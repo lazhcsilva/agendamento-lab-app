@@ -31,7 +31,7 @@ public class AgendamentoController {
     @Autowired
     private AgendamentoService agendamentoService;
 
-    @PostMapping("/cad_agend")
+    @PostMapping("/cadagend")
     public Response cadastaragendamento(@Valid @RequestBody Agendamento agendamento){
 
         // variavel que pega a query para fazer a validação de turno de agendamento
@@ -57,7 +57,7 @@ public class AgendamentoController {
     }
 
 
-    @PostMapping("/exibir_agendamento")
+    @PostMapping("/exibiragendamento")
     public List<ResponseAgendamentoGet> exibirnomefuncionario(@Valid @RequestBody Agendamento agendamento){
         // converte de objeto para Long
         Funcionario funcionario = agendamento.getFuncionario();
@@ -77,7 +77,7 @@ public class AgendamentoController {
         return responseList;
     }
 
-    @DeleteMapping("/delet_agend/{idAgendamento}")
+    @DeleteMapping("/deletagend/{idAgendamento}")
     public Response deleteFuncionario(@PathVariable Long idAgendamento, Agendamento agendamento){
         // variavel que pega a query para fazer a validação do id do agendamento
         Long id_agendamento_banco = agendamentoDAO.findAgendamento(agendamento.getIdAgendamento());

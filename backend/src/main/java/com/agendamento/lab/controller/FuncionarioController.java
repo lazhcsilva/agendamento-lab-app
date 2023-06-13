@@ -28,7 +28,7 @@ public class FuncionarioController {
     @Autowired
     private AgendamentoDAO agendamentoDAO;
 
-    @PostMapping("/cad_func")
+    @PostMapping("/cadfunc")
     public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){  
 
         //variavel que pegar de uma query para fazer a validação de funcionario existente      
@@ -49,7 +49,7 @@ public class FuncionarioController {
         }
     }
 
-    @GetMapping("/exibir_funcionario")
+    @GetMapping("/exibirfuncionario")
     public ResponseFuncionarioGet exibirnomefuncionario(@Valid @RequestBody Funcionario funcionario){
         //variavel que pega de uma query e exibir o nome do funcionario
         String nome = funcionarioDAO.findnameandchair(funcionario.getNome(),funcionario.getCadeira());
@@ -58,12 +58,12 @@ public class FuncionarioController {
         return new ResponseFuncionarioGet(nome);
     }
     // metodo que editar o cadastro do funcionario
-    @PatchMapping("/edit_func")
+    @PatchMapping("/editfunc")
     public ResponseEntity<?> editarFuncionario(@Valid @RequestBody Funcionario funcionario){
         return funcionarioService.updateFuncionario(funcionario, "update");
     }
 
-    @DeleteMapping("/delet_func/{matricula}")
+    @DeleteMapping("/deletfunc/{matricula}")
     public Response deleteFuncionario(@PathVariable Long matricula, Funcionario funcionario){
         //variavel que pegar de uma query para fazer a validação de funcionario existente para deletar 
         Long matricula_banco = funcionarioDAO.findMatricula(funcionario.getMatricula());
