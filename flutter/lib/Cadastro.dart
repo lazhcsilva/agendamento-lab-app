@@ -23,10 +23,10 @@ class _CadastroPageState extends State<CadastroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.purple,
+          backgroundColor: Color.fromRGBO(0, 0, 255, 0.54),
           toolbarHeight: 110,
           title: Text(
-            'Uninassau',
+            'Cadastro',
             style: TextStyle(
               fontFamily: 'Anton',
               color: Colors.white,
@@ -53,12 +53,14 @@ class _CadastroPageState extends State<CadastroPage> {
                             TextFormField(
                                 decoration: const InputDecoration(
                                   hintText: 'Insira seu nome',
-                                  hintStyle: TextStyle(color: Colors.purple),
+                                  hintStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 255, 0.54),
+                                  ),
                                   counterText: '',
                                   border: OutlineInputBorder(),
                                 ),
                                 controller: _Nome,
-                                maxLength: 10,
+                                maxLength: 20,
                                 keyboardType: TextInputType.text,
                                 validator: (text) {
                                   if (text == null || text.isEmpty)
@@ -69,12 +71,14 @@ class _CadastroPageState extends State<CadastroPage> {
                             TextFormField(
                               decoration: const InputDecoration(
                                   hintText: 'Insira seu e-mail',
-                                  hintStyle: TextStyle(color: Colors.purple),
+                                  hintStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 255, 0.54),
+                                  ),
                                   suffixText: 'e-mail',
                                   counterText: '',
                                   border: OutlineInputBorder()),
                               controller: _Email,
-                              maxLength: 10,
+                              maxLength: 20,
                               keyboardType: TextInputType.text,
                               validator: (text) {
                                 if (text == null || text.isEmpty)
@@ -86,12 +90,14 @@ class _CadastroPageState extends State<CadastroPage> {
                             TextFormField(
                               decoration: const InputDecoration(
                                   hintText: 'Insira sua senha',
-                                  hintStyle: TextStyle(color: Colors.purple),
+                                  hintStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 255, 0.54),
+                                  ),
                                   suffixText: 'Senha',
                                   counterText: '',
                                   border: OutlineInputBorder()),
                               controller: _Senha,
-                              maxLength: 10,
+                              maxLength: 20,
                               keyboardType: TextInputType.number,
                               validator: (text1) {
                                 if (text1 == null || text1.isEmpty)
@@ -103,12 +109,14 @@ class _CadastroPageState extends State<CadastroPage> {
                             TextFormField(
                               decoration: const InputDecoration(
                                   hintText: 'Insira sua senha',
-                                  hintStyle: TextStyle(color: Colors.purple),
+                                  hintStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 255, 0.54),
+                                  ),
                                   suffixText: 'Senha',
                                   counterText: '',
                                   border: OutlineInputBorder()),
                               controller: _Senha2,
-                              maxLength: 10,
+                              maxLength: 20,
                               keyboardType: TextInputType.number,
                               validator: (text2) {
                                 if (text2 == null ||
@@ -122,12 +130,14 @@ class _CadastroPageState extends State<CadastroPage> {
                             TextFormField(
                               decoration: const InputDecoration(
                                   hintText: 'Insira sua Cadeira',
-                                  hintStyle: TextStyle(color: Colors.purple),
+                                  hintStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 255, 0.54),
+                                  ),
                                   suffixText: 'Disciplina',
                                   counterText: '',
                                   border: OutlineInputBorder()),
                               controller: _Cadeira,
-                              maxLength: 10,
+                              maxLength: 20,
                               keyboardType: TextInputType.text,
                               validator: (text) {
                                 if (text == null || text.isEmpty)
@@ -140,7 +150,8 @@ class _CadastroPageState extends State<CadastroPage> {
                                   128.0, 8.0, 128.0, 8.0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.purple),
+                                  primary: Color.fromRGBO(0, 0, 255, 0.54),
+                                ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     setState(() {
@@ -181,7 +192,7 @@ class _CadastroPageState extends State<CadastroPage> {
   }
 
   Future<void> registerUser() async {
-    final url = Uri.https("http://127.0.0.1:8080/api/v1/cad_func");
+    final url = Uri.https("http://localhost:8080/api/v1/cadfunc");
 
     final data = {
       "nome": _Nome.text,
