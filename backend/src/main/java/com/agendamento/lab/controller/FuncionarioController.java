@@ -28,7 +28,7 @@ public class FuncionarioController {
     @Autowired
     private AgendamentoDAO agendamentoDAO;
 
-    @PostMapping("/cad_func")
+    @PostMapping("/cadfunc")
     public Response cadastarFuncionario(@Valid @RequestBody Funcionario funcionario){  
 
         //variavel que pegar de uma query para fazer a validação de funcionario existente      
@@ -49,7 +49,7 @@ public class FuncionarioController {
         }
     }
 
-    @GetMapping("/exibir_funcionario")
+    @GetMapping("/exibirfuncionario")
     public ResponseFuncionarioGet exibirnomefuncionario(@Valid @RequestBody Funcionario funcionario){
         //variavel que pega de uma query e exibir o nome do funcionario
         String nome = funcionarioDAO.findnameandchair(funcionario.getNome(),funcionario.getCadeira());

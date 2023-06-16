@@ -23,6 +23,7 @@ class _AgendamentoPageState extends State<AgendamentoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 0, 255, 0.54),
         title: Text('Agendamento'),
       ),
       body: Center(
@@ -71,6 +72,9 @@ class _AgendamentoPageState extends State<AgendamentoPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromRGBO(0, 0, 255, 0.54),
+                ),
                 onPressed: () {
                   Navigator.pop(
                     context,

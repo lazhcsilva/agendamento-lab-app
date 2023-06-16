@@ -18,6 +18,27 @@ class _CadastroPageState extends State<CadastroPage> {
   final TextEditingController _Senha2 = TextEditingController();
   final TextEditingController _Cadeira = TextEditingController();
   final TextEditingController _Email = TextEditingController();
+  Future<void> registerUser() async {
+    final url = Uri.https("http://localhost:8080/api/v1/cadfunc");
+
+    final data = {
+      "nome": _Nome.text,
+      "senha": _Senha.text,
+      "email": _Email.text,
+      "cadeira": _Cadeira.text
+    };
+
+    final body = jsonEncode(data);
+
+    final response = await http.post(url, body: body);
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      print(responseData);
+    } else {
+      // Erro
+      print('Erro na solicitação POST: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,27 +210,5 @@ class _CadastroPageState extends State<CadastroPage> {
             ),
           ],
         )));
-  }
-
-  Future<void> registerUser() async {
-    final url = Uri.https("http://localhost:8080/api/v1/cadfunc");
-
-    final data = {
-      "nome": _Nome.text,
-      "senha": _Senha.text,
-      "email": _Email.text,
-      "cadeira": _Cadeira.text
-    };
-
-    final body = jsonEncode(data);
-
-    final response = await http.post(url, body: body);
-    if (response.statusCode == 200) {
-      var responseData = jsonDecode(response.body);
-      print(responseData);
-    } else {
-      // Erro
-      print('Erro na solicitação POST: ${response.statusCode}');
-    }
   }
 }
