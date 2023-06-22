@@ -1,11 +1,13 @@
 package com.agendamento.lab.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +33,14 @@ public class AgendamentoController {
     @Autowired
     private AgendamentoService agendamentoService;
 
+    public boolean dataMenorQueHoje(LocalDate data) {
+        LocalDate hoje = LocalDate.now();
+        return data.compareTo(hoje) <= -1;
+    }
+
     @PostMapping("/cadagend")
     public Response cadastaragendamento(@Valid @RequestBody Agendamento agendamento){
-
+        
         // variavel que pega a query para fazer a validação de turno de agendamento
         String turno_agendamento_banco = agendamentoDAO.findturnoagendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Turno agendamento banco: " + turno_agendamento_banco );
@@ -42,14 +49,23 @@ public class AgendamentoController {
         LocalDate data_agendamento_banco = agendamentoDAO.findDataAgendamento(agendamento.getTurno(),agendamento.getData_agendamento());
         System.out.println("Data agendamento banco: " + data_agendamento_banco );
 
+        boolean data_menor_que_hoje = dataMenorQueHoje(agendamento.data_agendamento);
+        System.out.println("data menor que hoje: " + data_menor_que_hoje);
+        System.out.println("data do request: " + agendamento.data_agendamento);
 
-        if((turno_agendamento_banco == null && data_agendamento_banco == null) || (turno_agendamento_banco == null && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == agendamento.getData_agendamento()) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == null)){
+        if((turno_agendamento_banco == null && data_agendamento_banco == null && data_menor_que_hoje == false) || (turno_agendamento_banco == null && data_agendamento_banco == agendamento.getData_agendamento() && data_menor_que_hoje == false) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == agendamento.getData_agendamento() && data_menor_que_hoje == false) || (turno_agendamento_banco == agendamento.getTurno() && data_agendamento_banco == null && data_menor_que_hoje == false) ){         
             // chamada de metodo de salvar o agendamento
             this.agendamentoDAO.save(agendamento);
             int status = 200;
             String message = "Agendamento cadastrado com sucesso.";
             return new Response(status, message);
-        }else{
+        }
+        else if(data_menor_que_hoje == true){
+            int status = 410;
+            String message = "Agendamento com data no passado.";
+            return new Response(status, message);
+        }
+        else{
             int status = 409;
             String message = "Agendamento já cadastrado.";
             return new Response(status, message);

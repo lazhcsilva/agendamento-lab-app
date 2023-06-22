@@ -19,7 +19,7 @@ public class Agendamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAgendamento;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private LocalDate data_agendamento;
+	public LocalDate data_agendamento;
 	
 	private String turno;
 	
