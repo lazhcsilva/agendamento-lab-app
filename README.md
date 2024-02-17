@@ -2,4 +2,6 @@
 
 Projeto Acadêmico de agendamento de laboratório
 
-Protótipo figma - https://www.figma.com/file/7CO2hqRM2X1CBBN7T2MXQB/Conex%C3%A3o-LAB?type=design&node-id=52%3A62&t=xPZO24EG5b4cMHvf-1
+Trello: https://trello.com/b/S7AQj9Z2/projeto
+Github: https://github.com/lazhcsilva/agendamento-lab-app
+Figma: https://www.figma.com/file/0XVywJ4aCjtY9g5VkSB92S/Agendamento-Laboratorio?node-id=0-1&t=v9AucMgKZS3jiUEc-0
